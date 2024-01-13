@@ -6,7 +6,7 @@
 /*   By: jroulet <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 17:48:26 by jroulet           #+#    #+#             */
-/*   Updated: 2024/01/13 18:08:38 by jroulet          ###   ########.fr       */
+/*   Updated: 2024/01/13 18:34:08 by jroulet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,12 @@ int main(void)
 	pid_t pid;
 
 	pid = getpid();
-	printf("PID = :%d:\n", pid);
+	while(1)
+	{
+		sleep(5);
+		printf("PID = :%d:\n", pid);
+	}
+
 
 
 }
