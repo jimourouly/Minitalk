@@ -6,8 +6,18 @@
 /*   By: jroulet <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 17:48:26 by jroulet           #+#    #+#             */
-/*   Updated: 2024/01/13 17:48:28 by jroulet          ###   ########.fr       */
+/*   Updated: 2024/01/13 18:08:38 by jroulet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minitalk.h"
 
+int main(void)
+{
+	pid_t pid;
+
+	pid = getpid();
+	printf("PID = :%d:\n", pid);
+
+
+}

@@ -6,8 +6,16 @@
 /*   By: jroulet <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 17:48:35 by jroulet           #+#    #+#             */
-/*   Updated: 2024/01/13 17:48:38 by jroulet          ###   ########.fr       */
+/*   Updated: 2024/01/13 18:11:22 by jroulet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef MINITALK_H
+# define MINITALK_H
 
+#include <unistd.h>
+#include "libft/libft.h"
+
+
+
+#endif
