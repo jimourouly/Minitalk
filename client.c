@@ -6,7 +6,7 @@
 /*   By: jroulet <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 17:48:10 by jroulet           #+#    #+#             */
-/*   Updated: 2024/01/14 13:21:50 by jroulet          ###   ########.fr       */
+/*   Updated: 2024/01/14 13:52:59 by jroulet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,29 +32,29 @@ int str_to_binary(char *str)
 	int i;
 	int j;
 
+	str = "Salut";
 	if (str == NULL)
 		return (0);
 	len = ft_strlen(str);
 	binary = malloc((len * 8) + 1);
 	binary[0] = '\0';
-	i = 0;
 	j = 0;
-	while(message[j])
+	while(str[j])
 	{
-	
+		i = 0;
 		while (i < 8)
 		{
-			if ((char)(message[j] >> (7 - i)) & 1) == 0
+			if (((char)(str[j] >> (7 - i)) & 1) == 0)
 				printf ("0");
-			else if ((char)(message[j] >> (7 - i)) & 1) == 1
+			else if (((char)(str[j] >> (7 - i)) & 1) == 1)
 				printf("1");
 			i++;
 		}
+		printf("\t %c", str[j]);
 		j ++;
 		printf("\n");
 	}
-
-
+	return (1);
 }
 
 int main(int arc, char **arv)
@@ -67,7 +67,8 @@ int main(int arc, char **arv)
 		pid_t	pid;
 
 		pid = ft_atoi(arv[1]);
-		printf("%d", pid);
+		//printf("%d", pid);
+		str_to_binary(arv[1]);
 
 	}
 	return (0);

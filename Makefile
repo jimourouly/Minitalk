@@ -6,7 +6,7 @@
 #    By: jroulet <marvin@42lausanne.ch>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/13 18:37:45 by jroulet           #+#    #+#              #
-#    Updated: 2024/01/13 18:50:59 by jroulet          ###   ########.fr        #
+#    Updated: 2024/01/14 13:53:40 by jroulet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ NAME	= minitalk
 CC		= gcc
 RM		= rm -f
 
-CFLAGS 	= -Wall -Wextra -Werror
+CFLAGS 	= -g -Wall -Wextra -Werror
 
 all:		${NAME}
 
@@ -27,6 +27,12 @@ all:		${NAME}
 		${CC} ${CFLAGS} -Ilibft -Iprintf -c $? -o $@
 
 ${NAME}:	 server client
+
+git: fclean
+	make
+	git add .
+	git commit -m "$m"
+	git push
 
 server:		server.o
 		@make -C libft
