@@ -6,7 +6,7 @@
 /*   By: jroulet <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 17:48:10 by jroulet           #+#    #+#             */
-/*   Updated: 2024/01/14 13:52:59 by jroulet          ###   ########.fr       */
+/*   Updated: 2024/01/14 14:05:50 by jroulet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,13 @@
 #include "minitalk.h"
 
 
-int str_to_binary(char *str)
+int str_to_binary(char *str, int pid)
 {
 	size_t len;
 	char *binary;
 	int i;
 	int j;
 
-	str = "Salut";
 	if (str == NULL)
 		return (0);
 	len = ft_strlen(str);
@@ -45,14 +44,12 @@ int str_to_binary(char *str)
 		while (i < 8)
 		{
 			if (((char)(str[j] >> (7 - i)) & 1) == 0)
-				printf ("0");
+				kill(pid, SIGUSR1);
 			else if (((char)(str[j] >> (7 - i)) & 1) == 1)
-				printf("1");
+				kill(pid, SIGUSR2);
 			i++;
 		}
-		printf("\t %c", str[j]);
 		j ++;
-		printf("\n");
 	}
 	return (1);
 }
@@ -61,14 +58,13 @@ int main(int arc, char **arv)
 {
 
 	if (arc != 2)
-		printf("Enter PID to kill");
+		printf("pls enter a pid");
 	else 
 	{
 		pid_t	pid;
 
-		pid = ft_atoi(arv[1]);
-		//printf("%d", pid);
-		str_to_binary(arv[1]);
+		pid = ft_atoi(arv[1]);	
+		str_to_binary(arv[1], pid);
 
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: jroulet <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 17:48:26 by jroulet           #+#    #+#             */
-/*   Updated: 2024/01/13 20:19:58 by jroulet          ###   ########.fr       */
+/*   Updated: 2024/01/14 15:00:35 by jroulet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,26 @@
  *	2. Can support UNIX characers
  *
  *
- * 	SIGUSR1 = client
- * 	SIGUSR2 = server
  * */
 
 
 #include "minitalk.h"
 
+//will choose what to do when SIGUSR1 or SIGUSR2 is receive
+void signal_handler(int signum)
+{
+	printf("Signal received %d\n", signum);
+}
+
 int main(void)
 {
-	pid_t pid;
+	struct sigaction	signal_received;
 
-	pid = getpid();
-
-	while(1)
-	{
-		sleep(5);
-		printf("PID = :%d:\n", pid);
-	}
-
-
-
+	printf("PID = %d\n", getpid());
+	signal_received.sa_handler = signal_handler;
+	signal_received.sa_flags = 0;
+	sigaction(SIGUSR1, &signal_received, NULL);
+	sigaction(SIGUSR2, &signal_received, NULL);
+	while (1)
+		usleep(50);
 }
