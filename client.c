@@ -6,7 +6,7 @@
 /*   By: jroulet <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 17:48:10 by jroulet           #+#    #+#             */
-/*   Updated: 2024/01/14 15:43:56 by jroulet          ###   ########.fr       */
+/*   Updated: 2024/01/14 16:30:06 by jroulet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,25 +23,22 @@
  * */
 
 #include "minitalk.h"
-
+/*
 void send_to_server(int pid, int signum)
 {
-	printf("%d \n", signum);
+	printf("sendind %d %d \n", signum, (signum % 2));
 	kill(pid, signum);
 }
-
-int str_to_binary(char *str, int pid)
+*/
+void str_to_binary(char *str, int pid)
 {
 	size_t len;
-	char *binary;
 	int i;
 	int j;
 
 	if (str == NULL)
-		return (0);
+		return ;
 	len = ft_strlen(str);
-	binary = malloc((len * 8) + 1);
-	binary[0] = '\0';
 	j = 0;
 	while(str[j])
 	{
@@ -50,18 +47,19 @@ int str_to_binary(char *str, int pid)
 		{
 			if (((char)(str[j] >> (7 - i)) & 1) == 0)
 			{
-				send_to_server(pid, SIGUSR1);
+				printf("0");
+				kill(pid, SIGUSR1);
 			}
 			else if (((char)(str[j] >> (7 - i)) & 1) == 1)
 			{
-				send_to_server(pid, SIGUSR2);
+				printf("1");
+				kill(pid, SIGUSR2);
 			}
 				i++;
 		}
 		j ++;
-		printf("char send :%d:", j);
+		printf(" ");
 	}
-	return (1);
 }
 
 int main(int arc, char **arv)
@@ -69,7 +67,7 @@ int main(int arc, char **arv)
 
 	if (arc != 3)
 	{
-		printf("pls enter a pid ac = :%d:", arc );
+		printf("pls enter a PID" );
 	}
 	else 
 	{
