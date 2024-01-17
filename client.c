@@ -6,7 +6,7 @@
 /*   By: jroulet <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 17:48:10 by jroulet           #+#    #+#             */
-/*   Updated: 2024/01/17 16:10:57 by jroulet          ###   ########.fr       */
+/*   Updated: 2024/01/17 16:41:35 by jroulet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void str_to_binary(char *str, int pid)
 				}
 			}
 			i++;
-			usleep (10);
+			usleep (100);
 		}
 		j ++;
 		printf(" ");
