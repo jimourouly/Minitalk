@@ -6,7 +6,7 @@
 /*   By: jroulet <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 17:48:26 by jroulet           #+#    #+#             */
-/*   Updated: 2024/01/17 18:17:56 by jroulet          ###   ########.fr       */
+/*   Updated: 2024/01/17 18:33:10 by jroulet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void bin_to_txt(int bit, int end)
 	{
 		ft_printf("%s", word);
 		//TODO 
+		//
 		return ;
 	}
 	else if (end != 8 )
