@@ -6,7 +6,7 @@
 /*   By: jroulet <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 17:48:26 by jroulet           #+#    #+#             */
-/*   Updated: 2024/01/17 16:40:22 by jroulet          ###   ########.fr       */
+/*   Updated: 2024/01/17 17:12:16 by jroulet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,39 +26,27 @@
 
 #include "minitalk.h"
 
-void bit_to_text(int bit, int ending)
-{
-	if (ending == 8)
-	{
-		printf("end of letter\n");
-	}
-	else
-	{
-		printf("bit {%d} %d\n", bit, ending);
-	}
-}
-
 //will choose what to do when SIGUSR1 or SIGUSR2 is receive
 void signal_handler(int signum)
 {
+	char digit;
 	static int i;
+
+	digit =  signum + 18;
 	if (i == 8)
 	{
-		bit_to_text(signum, i);
+		write(1, " ", 1);
 		i = 0;
 	}
-	else
-	{
-		bit_to_text(signum, i);
-		i++;
-	}
+	write(1, &digit, 1);
+	i++;
 }
 
 int main(void)
 {
 	struct sigaction	signal_received;
 
-	printf("PID = %d\n", getpid());
+	ft_printf("PID = %d\n", getpid());
 	signal_received.sa_handler = signal_handler;
 	signal_received.sa_flags = 0;
 	sigaction(SIGUSR1, &signal_received, NULL);
