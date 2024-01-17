@@ -6,7 +6,7 @@
 #    By: jroulet <marvin@42lausanne.ch>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/13 18:37:45 by jroulet           #+#    #+#              #
-#    Updated: 2024/01/14 13:54:33 by jroulet          ###   ########.fr        #
+#    Updated: 2024/01/17 16:45:21 by jroulet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ ${NAME}:	 server client
 
 git: fclean
 	git add .
-	git commit -m "$m"
+	git commit -m "$t" -m"$b"
 	git push
 
 server:		server.o
