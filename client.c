@@ -6,7 +6,7 @@
 /*   By: jroulet <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 17:48:10 by jroulet           #+#    #+#             */
-/*   Updated: 2024/01/14 16:30:06 by jroulet          ###   ########.fr       */
+/*   Updated: 2024/01/17 16:10:57 by jroulet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void str_to_binary(char *str, int pid)
 	size_t len;
 	int i;
 	int j;
+	int k;
 
 	if (str == NULL)
 		return ;
@@ -48,14 +49,26 @@ void str_to_binary(char *str, int pid)
 			if (((char)(str[j] >> (7 - i)) & 1) == 0)
 			{
 				printf("0");
-				kill(pid, SIGUSR1);
+				k = kill(pid, SIGUSR1);
+				if (k < 0)
+				{
+					printf("Error while sending message");
+					return ;
+				}
+
 			}
 			else if (((char)(str[j] >> (7 - i)) & 1) == 1)
 			{
 				printf("1");
-				kill(pid, SIGUSR2);
+				k = kill(pid, SIGUSR2);
+				if (k < 0)
+				{
+					printf("error while sending message");
+					return ;
+				}
 			}
-				i++;
+			i++;
+			usleep (10);
 		}
 		j ++;
 		printf(" ");

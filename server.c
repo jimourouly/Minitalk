@@ -6,7 +6,7 @@
 /*   By: jroulet <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 17:48:26 by jroulet           #+#    #+#             */
-/*   Updated: 2024/01/14 16:54:21 by jroulet          ###   ########.fr       */
+/*   Updated: 2024/01/17 16:30:38 by jroulet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,15 @@
 //will choose what to do when SIGUSR1 or SIGUSR2 is receive
 void signal_handler(int signum)
 {
-	
-	printf("%d \n", signum );	
+	static int i;
+	if (i == 8)
+	{
+		printf("\n");
+		i = 0;
+	}
+	printf("%d ",  signum);
+	i++;
+	printf("\n");	
 }
 
 int main(void)
@@ -42,6 +49,11 @@ int main(void)
 	signal_received.sa_flags = 0;
 	sigaction(SIGUSR1, &signal_received, NULL);
 	sigaction(SIGUSR2, &signal_received, NULL);
-	pause();
+	
+	while(1)
+	{
+		usleep(100);
+	}
+	//pause();
 	return (0);
 }
