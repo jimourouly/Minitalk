@@ -6,7 +6,7 @@
 /*   By: jroulet <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 17:48:26 by jroulet           #+#    #+#             */
-/*   Updated: 2024/01/17 18:33:10 by jroulet          ###   ########.fr       */
+/*   Updated: 2024/01/22 16:54:09 by jroulet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,47 +26,32 @@
 
 #include "minitalk.h"
 
-void bin_to_txt(int bit, int end)
+void bin_to_txt(char *str)
 {
-	char word[8];
-
-	if(end == 8)
-	{
-		ft_printf("%s", word);
-		//TODO 
-		//
-		return ;
-	}
-	else if (end != 8 )
-	{
-		word[end] = bit;
-		//TODO
-		return ;
-	}
-	
+	ft_printf("%s", str);
 }
 
 //will choose what to do when SIGUSR1 or SIGUSR2 is receive
 void signal_handler(int signum)
 {
-	char digit;
 	static int i;
+	char *bit;
 
-	digit =  signum + 18;
-
-	//if i = 8, end of the word
+	printf("salut");
+	bit = NULL;
 	if (i == 8)
 	{
-		bin_to_txt((digit), i);
-//		write(1, " ", 1);
 		i = 0;
+		ft_printf("%s", bit);
 	}
 	else 
 	{
-		bin_to_txt((digit), i);
-//		write(1, &digit, 1);
+		if (signum == SIGUSR1)
+			bit += 0;
+		else if (signum == SIGUSR2)
+			bit += 1;
+		i++;
 	}
-	i++;
 }
 
 int main(void)
@@ -81,7 +66,7 @@ int main(void)
 	
 	while(1)
 	{
-		usleep(100);
+		usleep(42);
 	}
 	//pause();
 	return (0);
