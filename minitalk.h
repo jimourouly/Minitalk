@@ -6,7 +6,7 @@
 /*   By: jroulet <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 17:48:35 by jroulet           #+#    #+#             */
-/*   Updated: 2024/01/17 16:51:19 by jroulet          ###   ########.fr       */
+/*   Updated: 2024/01/22 15:49:18 by jroulet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 #include <stdio.h>
 #include <signal.h>
 #include "libft/libft.h"
-#include "printf/ft_printf.h"
 
 
 #endif

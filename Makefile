@@ -6,7 +6,7 @@
 #    By: jroulet <marvin@42lausanne.ch>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/13 18:37:45 by jroulet           #+#    #+#              #
-#    Updated: 2024/01/17 16:45:21 by jroulet          ###   ########.fr        #
+#    Updated: 2024/01/22 15:49:56 by jroulet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ CFLAGS 	= -g -Wall -Wextra -Werror
 all:		${NAME}
 
 %.o:	%.c
-		${CC} ${CFLAGS} -Ilibft -Iprintf -c $? -o $@
+		${CC} ${CFLAGS} -Ilibft -c $? -o $@
 
 ${NAME}:	 server client
 
@@ -35,23 +35,17 @@ git: fclean
 
 server:		server.o
 		@make -C libft
-		@make -C printf
-		${CC} ${CFLAGS} $? -Llibft -lft -Lprintf -lftprintf -o server
+		${CC} ${CFLAGS} $? -Llibft -lft -o server
 
 client:		client.o
 		@make -C libft
-		@make -C printf
-		${CC} ${CFLAGS} $? -Llibft -lft -Lprintf -lftprintf -o client
+		${CC} ${CFLAGS} $? -Llibft -lft -o client
 
 libft:
 		make -C libft
 
-printf:
-		make -C printf
-
 clean:
 			make clean -C libft
-			make clean -C printf
 			${RM} ${OBJS}
 
 fclean:		clean
