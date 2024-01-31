@@ -32,14 +32,14 @@ void send_to_server(int pid, int signum)
 */
 void str_to_binary(char *str, int pid)
 {
-	size_t len;
+//	size_t len;
 	int i;
 	int j;
 	int k;
 
 	if (str == NULL)
 		return ;
-	len = ft_strlen(str);
+//	len = ft_strlen(str);
 	j = 0;
 	while(str[j])
 	{

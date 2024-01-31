@@ -26,32 +26,27 @@
 
 #include "minitalk.h"
 
-void bin_to_txt(char *str)
-{
-	ft_printf("%s", str);
-}
 
 //will choose what to do when SIGUSR1 or SIGUSR2 is receive
 void signal_handler(int signum)
 {
 	static int i;
-	char *bit;
+    static int j;
+	int nb;
 
-	printf("salut");
-	bit = NULL;
-	if (i == 8)
-	{
-		i = 0;
-		ft_printf("%s", bit);
-	}
-	else 
-	{
-		if (signum == SIGUSR1)
-			bit += 0;
-		else if (signum == SIGUSR2)
-			bit += 1;
-		i++;
-	}
+    if (signum == SIGUSR1)
+        nb = 0;
+    else
+        nb = 1;
+    j = (j << 1)  + nb;
+    i++;
+    if (i == 8)
+    {
+        write(1, &j ,1);
+        i = 0;
+        j = 0;
+    }
+
 }
 
 int main(void)
@@ -62,7 +57,7 @@ int main(void)
 	signal_received.sa_handler = signal_handler;
 	signal_received.sa_flags = 0;
 	sigaction(SIGUSR1, &signal_received, NULL);
-	sigaction(SIGUSR2, &signal_received, NULL);
+    sigaction(SIGUSR2, &signal_received, NULL);
 	
 	while(1)
 	{
