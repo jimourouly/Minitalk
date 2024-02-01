@@ -6,7 +6,7 @@
 /*   By: jroulet <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 17:48:26 by jroulet           #+#    #+#             */
-/*   Updated: 2024/02/01 17:35:14 by jroulet          ###   ########.fr       */
+/*   Updated: 2024/02/01 17:51:55 by jroulet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	signal_handler(int signum, siginfo_t *info, void *context)
 	int			nb;
 
 	(void)context;
-	(void)info;
 	if (signum == SIGUSR1)
 		nb = 0;
 	else
@@ -31,7 +30,7 @@ void	signal_handler(int signum, siginfo_t *info, void *context)
 	{
 		if (j == 0)
 		{
-			//kill(info->si_pid, SIGUSR1);
+			kill(info->si_pid, SIGUSR1);
 		}
 		else
 			write (1, &j, 1);
