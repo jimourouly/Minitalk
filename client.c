@@ -6,23 +6,14 @@
 /*   By: jroulet <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 17:48:10 by jroulet           #+#    #+#             */
-/*   Updated: 2024/02/01 16:12:29 by jroulet          ###   ########.fr       */
+/*   Updated: 2024/02/01 17:34:25 by jroulet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minitalk.h"
 
-void	errormsg(void)
-{
-	write (1, "message can't be send\n", 22);
-}
-
 void	eof(int pid)
 {
 	int	i;
-	pid_t	pid;
-
-	pid = getpid();
-
 
 	i = 1;
 	while(i <= 8)
@@ -31,6 +22,7 @@ void	eof(int pid)
 		i++;
 		usleep(42);
 	}
+
 }
 
 void	str_to_binary(char *str, int pid)
@@ -57,12 +49,13 @@ void	str_to_binary(char *str, int pid)
 		j++;
 	}
 	if (k < 0)
-		errormsg();
+		write(1, "can't send message\n", 19);
 }
+
 
 int	main(int arc, char **arv)
 {
-	pid_t	pid;
+	pid_t				pid;
 
 	pid = 0 ;
 	if (arc != 3)
