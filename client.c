@@ -6,7 +6,7 @@
 /*   By: jroulet <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 17:48:10 by jroulet           #+#    #+#             */
-/*   Updated: 2024/02/02 14:47:14 by jroulet          ###   ########.fr       */
+/*   Updated: 2024/02/02 14:54:34 by jroulet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minitalk.h"
@@ -57,16 +57,24 @@ void	signal_handler(int signum, siginfo_t *info, void *context)
 {
 	(void)info;
 	(void)context;
-	if (signum == SIGUSR2)
-		write(1, "message transmitted", 19);
+	/*
+	if (signum == SIGUSR2 || signum == SIGUSR1)
+		write(1, "message transmitted", 19);*/
+
+	if (signum == SIGUSR1)
+		write(1, "sigusr1", 7);
+	else 
+		write(1, "sigusr2", 7);
 }
 
 int	main(int arc, char **arv)
 {
 	pid_t				pid;
+	int					send;
 	struct sigaction	signal_received;
 
 
+	send = 0;
 	pid = 0 ;
 	if (arc != 3)
 		ft_printf("USE : ./client -server's PID- and ''message''");
@@ -74,11 +82,13 @@ int	main(int arc, char **arv)
 	{
 		pid = ft_atoi(arv[1]);
 		str_to_binary(arv[2], pid);
+		send = 1;
 	}
 	signal_received.sa_sigaction = signal_handler;
 	signal_received.sa_flags = SA_SIGINFO;
 	sigaction(SIGUSR1, &signal_received, NULL);
 	sigaction(SIGUSR2, &signal_received, NULL);
-	eof(pid);
+	if (send == 1)
+		eof(pid);
 	return (0);
 }
