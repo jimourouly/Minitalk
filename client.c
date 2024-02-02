@@ -6,7 +6,7 @@
 /*   By: jroulet <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 17:48:10 by jroulet           #+#    #+#             */
-/*   Updated: 2024/02/01 17:52:28 by jroulet          ###   ########.fr       */
+/*   Updated: 2024/02/02 14:47:14 by jroulet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minitalk.h"
@@ -41,18 +41,15 @@ void	str_to_binary(char *str, int pid)
 		{
 			if (((char)(str[j] >> (7 - i)) & 1) == 0)
 				k = kill(pid, SIGUSR1);
-			if (k < 0)
-				write(1, "can't send message\n", 19);
-
 			else if (((char)(str[j] >> (7 - i)) & 1) == 1)
 				k = kill(pid, SIGUSR2);
-			if (k < 0)
-				write(1, "can't send message\n", 19);
 			i++;
 			usleep (100);
 		}
 		j++;
 	}
+	if (k < 0)
+		write(1, "message can't be send", 21);
 
 }
 
@@ -60,7 +57,7 @@ void	signal_handler(int signum, siginfo_t *info, void *context)
 {
 	(void)info;
 	(void)context;
-	if (signum == SIGUSR1)
+	if (signum == SIGUSR2)
 		write(1, "message transmitted", 19);
 }
 
