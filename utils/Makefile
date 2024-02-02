@@ -5,53 +5,44 @@
 #                                                     +:+ +:+         +:+      #
 #    By: jroulet <marvin@42lausanne.ch>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/02/02 14:33:27 by jroulet           #+#    #+#              #
-#    Updated: 2024/02/02 14:33:28 by jroulet          ###   ########.fr        #
+#    Created: 2023/11/18 20:02:41 by jroulet           #+#    #+#              #
+#    Updated: 2023/11/25 17:19:58 by jroulet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-SRCS	= client.c server.c
+NAME = libft.a
 
-OBJS	:= $(SRCS:%.c=%.o)
+CC = cc
+CFLAGS = -Wall -Werror -Wextra
+LIBFTDIR = ./libft
 
-NAME	= minitalk
+SRCS = 	ft_print_char.c\
+		ft_print_hex.c\
+		ft_print_nbr.c\
+		ft_print_percent.c\
+		ft_print_ptr.c\
+		ft_print_str.c\
+		ft_print_uns.c\
+		ft_printf.c\
+		ft_uitoa.c\
+		ft_putchar_fd.c\
+		ft_itoa.c\
+		ft_atoi.c\
 
-CC		= gcc
-RM		= rm -f
 
-CFLAGS 	= -g -Wall -Wextra -Werror
+OBJS = $(SRCS:.c=.o)
 
-all:		${NAME}
+all: $(NAME)
 
-%.o:	%.c
-		${CC} ${CFLAGS} -Iutils -c $? -o $@
 
-${NAME}:	 server client
-
-git: fclean
-	git add .
-	git commit -m "$t" -m"$b"
-	git push
-
-server:		server.o
-		@make -C utils
-		${CC} ${CFLAGS} $? -Lutils -lft -o server
-
-client:		client.o
-		@make -C utils
-		${CC} ${CFLAGS} $? -Lutils -lft -o client
-
-libft:
-		make -C utils
+$(NAME): $(OBJS)
+	ar -r $(NAME) $(OBJS)
 
 clean:
-			make clean -C utils
-			${RM} ${OBJS}
-
-fclean:		clean
-			${RM} server client
-
-re:			fclean all
-
-.PHONY:		printf
+	rm -f $(OBJS)
+	
+fclean: clean
+	rm -f $(NAME)
+	
+re: fclean all

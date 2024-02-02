@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitlalk.h                                        :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jroulet <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/13 17:48:35 by jroulet           #+#    #+#             */
-/*   Updated: 2024/02/01 15:05:15 by jroulet          ###   ########.fr       */
+/*   Created: 2023/10/21 17:46:43 by jroulet           #+#    #+#             */
+/*   Updated: 2023/10/21 19:42:17 by jroulet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "ft_printf.h"
 
-# include <unistd.h>
-# include <stdio.h>
-# include <signal.h>
-# include "utils/ft_printf.h"
-
-#endif
+void	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
+}
