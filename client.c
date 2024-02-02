@@ -6,7 +6,7 @@
 /*   By: jroulet <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 17:48:10 by jroulet           #+#    #+#             */
-/*   Updated: 2024/02/02 14:54:34 by jroulet          ###   ########.fr       */
+/*   Updated: 2024/02/02 14:58:14 by jroulet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minitalk.h"
@@ -57,14 +57,8 @@ void	signal_handler(int signum, siginfo_t *info, void *context)
 {
 	(void)info;
 	(void)context;
-	/*
 	if (signum == SIGUSR2 || signum == SIGUSR1)
-		write(1, "message transmitted", 19);*/
-
-	if (signum == SIGUSR1)
-		write(1, "sigusr1", 7);
-	else 
-		write(1, "sigusr2", 7);
+		write(1, "message transmitted", 19);
 }
 
 int	main(int arc, char **arv)
