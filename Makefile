@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jroulet <marvin@42lausanne.ch>             +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/02/10 16:55:19 by jroulet           #+#    #+#              #
+#    Updated: 2024/02/10 17:38:58 by jroulet          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 FLAGS =  -Wall -Werror -Wextra
 CC = cc
 CLIENT = client
@@ -11,28 +23,32 @@ OBJS = $(SRCS:.c=.o)
 BOBJS = $(BSRCS:.c=.o)
 
 UTILSDIR = ./utils
-UTILSNAME = libft.a
+UTILSNAME = utils.a
+NAME = minitalk.a
 
 all: makeutils $(CLIENT) $(SERVER)
+
+$(NAME): makeutils $(OBJS) 
+	ar -r $(NAME) $(OBJS)
 
 makeutils:
 	make -C $(UTILSDIR)
 	cp $(UTILSDIR)/$(UTILSNAME) .
-	mv $(UTILSNAME) $(UTILSDIR)
+	mv $(UTILSNAME) $(NAME)
 
 $(CLIENT): client.c
-	$(CC) $(FLAGS) client.c -L$(UTILSDIR) -lft -o $(CLIENT)
+	$(CC) $(FLAGS) client.c $(NAME)  -o $(CLIENT)
 
 $(SERVER): server.c
-	$(CC) $(FLAGS) server.c -L$(UTILSDIR) -lft -o $(SERVER)
+	$(CC) $(FLAGS) server.c $(NAME) -o $(SERVER)
 
 bonus: makeutils $(CLIENT_BONUS) $(SERVER_BONUS)
 
 $(CLIENT_BONUS): client_bonus.c
-	$(CC) $(FLAGS) client_bonus.c -L$(UTILSDIR) -lft -o $(CLIENT_BONUS)
+	$(CC) $(FLAGS) client_bonus.c $(NAME) -o $(CLIENT_BONUS)
 
 $(SERVER_BONUS): server_bonus.c
-	$(CC) $(FLAGS) server_bonus.c -L$(UTILSDIR) -lft -o $(SERVER_BONUS)
+	$(CC) $(FLAGS) server_bonus.c $(NAME) -o $(SERVER_BONUS)
 
 git: fclean
 	git add .
@@ -44,6 +60,7 @@ clean:
 	rm -f $(OBJS) $(BOBJS)
 
 fclean: clean
+	rm -f $(NAME)
 	make -C $(UTILSDIR) fclean
 	rm -f $(CLIENT) $(SERVER) $(CLIENT_BONUS) $(SERVER_BONUS)
 

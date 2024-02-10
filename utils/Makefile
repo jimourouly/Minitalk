@@ -6,16 +6,15 @@
 #    By: jroulet <marvin@42lausanne.ch>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/18 20:02:41 by jroulet           #+#    #+#              #
-#    Updated: 2023/11/25 17:19:58 by jroulet          ###   ########.fr        #
+#    Updated: 2024/02/10 17:24:21 by jroulet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-NAME = libft.a
+NAME = utils.a
 
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
-LIBFTDIR = ./libft
 
 SRCS = 	ft_print_char.c\
 		ft_print_hex.c\
