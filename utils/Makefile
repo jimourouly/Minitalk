@@ -6,12 +6,12 @@
 #    By: jroulet <marvin@42lausanne.ch>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/18 20:02:41 by jroulet           #+#    #+#              #
-#    Updated: 2024/02/10 17:24:21 by jroulet          ###   ########.fr        #
+#    Updated: 2024/02/10 17:41:59 by jroulet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-NAME = utils.a
+NAME = miniutils.a
 
 CC = cc
 CFLAGS = -Wall -Werror -Wextra

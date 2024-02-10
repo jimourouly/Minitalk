@@ -6,7 +6,7 @@
 #    By: jroulet <marvin@42lausanne.ch>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/10 16:55:19 by jroulet           #+#    #+#              #
-#    Updated: 2024/02/10 17:38:58 by jroulet          ###   ########.fr        #
+#    Updated: 2024/02/10 17:41:49 by jroulet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ OBJS = $(SRCS:.c=.o)
 BOBJS = $(BSRCS:.c=.o)
 
 UTILSDIR = ./utils
-UTILSNAME = utils.a
+UTILSNAME = miniutils.a
 NAME = minitalk.a
 
 all: makeutils $(CLIENT) $(SERVER)
