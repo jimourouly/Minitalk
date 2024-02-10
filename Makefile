@@ -1,57 +1,50 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: jroulet <marvin@42lausanne.ch>             +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/02/02 14:33:27 by jroulet           #+#    #+#              #
-#    Updated: 2024/02/02 14:33:28 by jroulet          ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+FLAGS =  -Wall -Werror -Wextra
+CC = cc
+CLIENT = client
+SERVER = server
+CLIENT_BONUS = client_bonus
+SERVER_BONUS = server_bonus
 
+SRCS = client.c server.c
+BSRCS = client_bonus.c server_bonus.c
+OBJS = $(SRCS:.c=.o)
+BOBJS = $(BSRCS:.c=.o)
 
-SRCS	= client.c server.c
+UTILSDIR = ./utils
+UTILSNAME = libft.a
 
-OBJS	:= $(SRCS:%.c=%.o)
+all: makeutils $(CLIENT) $(SERVER)
 
-NAME	= minitalk
+makeutils:
+	make -C $(UTILSDIR)
+	cp $(UTILSDIR)/$(UTILSNAME) .
+	mv $(UTILSNAME) $(UTILSDIR)
 
-CC		= gcc
-RM		= rm -f
+$(CLIENT): client.c
+	$(CC) $(FLAGS) client.c -L$(UTILSDIR) -lft -o $(CLIENT)
 
-CFLAGS 	= -g -Wall -Wextra -Werror
+$(SERVER): server.c
+	$(CC) $(FLAGS) server.c -L$(UTILSDIR) -lft -o $(SERVER)
 
-all:		${NAME}
+bonus: makeutils $(CLIENT_BONUS) $(SERVER_BONUS)
 
-%.o:	%.c
-		${CC} ${CFLAGS} -Iutils -c $? -o $@
+$(CLIENT_BONUS): client_bonus.c
+	$(CC) $(FLAGS) client_bonus.c -L$(UTILSDIR) -lft -o $(CLIENT_BONUS)
 
-${NAME}:	 server client
+$(SERVER_BONUS): server_bonus.c
+	$(CC) $(FLAGS) server_bonus.c -L$(UTILSDIR) -lft -o $(SERVER_BONUS)
 
 git: fclean
 	git add .
 	git commit -m "$t" -m"$b"
 	git push
 
-server:		server.o
-		@make -C utils
-		${CC} ${CFLAGS} $? -Lutils -lft -o server
-
-client:		client.o
-		@make -C utils
-		${CC} ${CFLAGS} $? -Lutils -lft -o client
-
-libft:
-		make -C utils
-
 clean:
-			make clean -C utils
-			${RM} ${OBJS}
+	make -C $(UTILSDIR) clean
+	rm -f $(OBJS) $(BOBJS)
 
-fclean:		clean
-			${RM} server client
+fclean: clean
+	make -C $(UTILSDIR) fclean
+	rm -f $(CLIENT) $(SERVER) $(CLIENT_BONUS) $(SERVER_BONUS)
 
-re:			fclean all
-
-.PHONY:		printf
+re: fclean all bonus
